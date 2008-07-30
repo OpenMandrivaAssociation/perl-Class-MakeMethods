@@ -1,6 +1,6 @@
 %define module  Class-MakeMethods
 %define version 1.009
-%define release %mkrel 1
+%define release %mkrel 3
 %define	pdir	Class
 
 Summary: 	%{module} module for perl
