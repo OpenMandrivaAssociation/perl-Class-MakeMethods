@@ -1,32 +1,29 @@
-%define module  Class-MakeMethods
-%define version 1.009
-%define release %mkrel 3
-%define	pdir	Class
+%define upstream_name    Class-MakeMethods
+%define upstream_version 1.01
 
-Summary: 	%{module} module for perl
-Name: 		perl-%{module}
-Version: 	%{version}
-Release: 	%{release}
-License: 	GPL or Artistic
+Name: 		perl-%{upstream_name}
+Version: 	%perl_convert_version %{upstream_version}
+Release: 	%mkrel 1
+
+Summary: 	Generate common types of methods 
+License: 	GPL+ or Artistic
 Group: 		Development/Perl
-Source0: 	ftp://ftp.perl.org/pub/CPAN/modules/by-module/%{pdir}/%{module}-%{version}.tar.bz2
-Url:            http://search.cpan.org/search?dist=%{module}
+Url:        http://search.cpan.org/dist/%{upstream_name}/
+Source0: 	ftp://ftp.perl.org/pub/CPAN/modules/by-module/Class/%{upstream_name}-%{upstream_version}.tar.gz
+
 BuildArch: 	noarch
-BuildRoot: 	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
-Requires: 	perl >= 5.005 , perl-base >= 5.005
-BuildRequires:	perl-devel >= 5.005
+BuildRoot: 	%{_tmppath}/%{name}-%{version}-%{release}
 
 %define _requires_exceptions perl(Class::MakeMethods::Template::Array)
 
 %description
-%{module} module for perl.  By passing arguments to "use
-Class::MakeMethods ..." statements, you can select from a library of
-hundreds of common types of methods, which are dynamically generated
-and installed as subroutines in your module, simplifying the code for
-your class.
+By passing arguments to "use Class::MakeMethods ..." statements, you can
+select from a library of hundreds of common types of methods, which are
+dynamically generated and installed as subroutines in your module,
+simplifying the code for your class.
 
 %prep
-%setup -q -n %{module}-%{version}
+%setup -q -n %{upstream_name}-%{upstream_version}
 
 %build
 # use all defaults
@@ -46,5 +43,6 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc README CHANGES
 %{perl_vendorlib}/Class/MakeMethods*
+%{perl_vendorlib}/Class/benchmark.pl
 %{_mandir}/man*/*
 
